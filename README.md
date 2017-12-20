@@ -21,5 +21,7 @@
 
 ## 文件下载
 [github代码下载链接]（https://github.com/bleakie/FaceRecognition-master）
+## 大赛官网
+(http://iotcompetition.org/)
 ## 技术支持
 (http://www.greenorbs.com/)
