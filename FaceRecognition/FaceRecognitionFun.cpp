@@ -1,21 +1,21 @@
 /*
-## ´´½¨±êÊ¶£ºµÚÎå½ìÈ«¹ú´óÑ§ÉúÎïÁªÍø´óÈüÈËÁ³Ê¶±ğdemo
+## åˆ›å»ºæ ‡è¯†ï¼šç¬¬äº”å±Šå…¨å›½é«˜æ ¡ç‰©è”ç½‘åº”ç”¨åˆ›æ–°å¤§èµ›ï¼ˆå‘½é¢˜èµ›ï¼‰äººè„¸è¯†åˆ«demo
 
-## ´´½¨Ê±¼ä£º2017-12-20
+## åˆ›å»ºæ—¶é—´ï¼š2017-12-20
 
-## º¯Êı¹¦ÄÜÃèÊö£ºÈËÁ³Ê¶±ğ¿Ø¼ş
+## å‡½æ•°åŠŸèƒ½æè¿°ï¼šäººè„¸è¯†åˆ«æ§ä»¶
 
-## ¿ª·¢»·¾³
+## å¼€å‘ç¯å¢ƒ
 [Windows10+VS2015+Qt5.6+opencv2.4.11]
-**¿ª·¢ÓïÑÔC++**
-**±àÒë»·¾³x64**
+**å¼€å‘è¯­è¨€C++**
+**ç¼–è¯‘ç¯å¢ƒx64**
 
-## »·¾³ÅäÖÃ
-**ÅäÖÃopencv2.4.11µÄ»·¾³**
-**ÅäÖÃQt5.6+VS2015µÄ»·¾³**
-**ÏîÄ¿ÊôĞÔ-Á´½ÓÆ÷-ÊäÈë-¸½¼ÓÒÀÀµÏî ĞèÒªÌí¼ÓÏà¹ØlibÎÄ¼ş
+## ç¯å¢ƒé…ç½®
+**é…ç½®opencv2.4.11çš„ç¯å¢ƒ**
+**é…ç½®Qt5.6+VS2015çš„ç¯å¢ƒ**
+**é¡¹ç›®å±æ€§-é“¾æ¥å™¨-è¾“å…¥-é™„åŠ ä¾èµ–é¡¹ éœ€è¦æ·»åŠ ç›¸å…³libæ–‡ä»¶
 
-## ¼¼ÊõÖ§³Ö
+## æŠ€æœ¯æ”¯æŒ
 (http://www.greenorbs.com/)
 */
 
@@ -26,7 +26,7 @@ void FaceRecognitionFun::Init()
 {
 	isLoadTrain = false;
 }
-//--------------------------------»æÖÆÈËÁ³¼ì²â¿ò----------------------------------------//
+//--------------------------------ç»˜åˆ¶äººè„¸æ£€æµ‹æ¡†----------------------------------------//
 cv::Mat FaceRecognitionFun::Draw(FaceStruct face_struct, cv::Mat src)
 {
 	std::vector<cv::Rect> rect = face_struct.faceRect;
@@ -35,7 +35,7 @@ cv::Mat FaceRecognitionFun::Draw(FaceStruct face_struct, cv::Mat src)
 
 	return src;
 }
-//------------------------------------±ê¼Ç½á¹û----------------------------------------//
+//------------------------------------æ ‡è®°ç»“æœ----------------------------------------//
 void FaceRecognitionFun::DrawResult(FaceStruct& face_struct, int index, string argmaxName)
 {
 	face_struct.drawImg = face_struct.image;
@@ -52,7 +52,7 @@ void FaceRecognitionFun::DrawProcessedFace(std::vector<FaceStruct>& face_struct)
 	}
 }
 
-//--------------------------------Ê¶±ğµ÷ÓÃ¹«Ê½----------------------------------------//
+//--------------------------------è¯†åˆ«è°ƒç”¨å…¬å¼----------------------------------------//
 void FaceRecognitionFun::Recognition(const std::vector<string> train_path_list, const string test_path,
 	std::vector<FaceStruct>& face_struct_train, FaceStruct& face_struct_test, std::vector<std::vector<float>>& result)
 {
@@ -64,7 +64,7 @@ void FaceRecognitionFun::Recognition(const std::vector<string> train_path_list, 
 	}
 	face_struct_test.fileName = test_path;
 
-	//ÈËÁ³Ê¶±ğ
+	//äººè„¸è¯†åˆ«
 	result = face_feature.Recongnize(face_struct_train, face_struct_test);
 	DrawProcessedFace(face_struct_train);
 }
