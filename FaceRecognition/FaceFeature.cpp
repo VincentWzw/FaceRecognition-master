@@ -1,21 +1,21 @@
 /*
-## ´´½¨±êÊ¶£ºµÚÎå½ìÈ«¹ú´óÑ§ÉúÎïÁªÍø´óÈüÈËÁ³Ê¶±ğdemo
+## åˆ›å»ºæ ‡è¯†ï¼šç¬¬äº”å±Šå…¨å›½é«˜æ ¡ç‰©è”ç½‘åº”ç”¨åˆ›æ–°å¤§èµ›ï¼ˆå‘½é¢˜èµ›ï¼‰äººè„¸è¯†åˆ«demo
 
-## ´´½¨Ê±¼ä£º2017-12-20
+## åˆ›å»ºæ—¶é—´ï¼š2017-12-20
 
-## º¯Êı¹¦ÄÜÃèÊö£ºÈËÁ³Ê¶±ğ¿Ø¼ş
+## å‡½æ•°åŠŸèƒ½æè¿°ï¼šäººè„¸è¯†åˆ«æ§ä»¶
 
-## ¿ª·¢»·¾³
+## å¼€å‘ç¯å¢ƒ
 [Windows10+VS2015+Qt5.6+opencv2.4.11]
-**¿ª·¢ÓïÑÔC++**
-**±àÒë»·¾³x64**
+**å¼€å‘è¯­è¨€C++**
+**ç¼–è¯‘ç¯å¢ƒx64**
 
-## »·¾³ÅäÖÃ
-**ÅäÖÃopencv2.4.11µÄ»·¾³**
-**ÅäÖÃQt5.6+VS2015µÄ»·¾³**
-**ÏîÄ¿ÊôĞÔ-Á´½ÓÆ÷-ÊäÈë-¸½¼ÓÒÀÀµÏî ĞèÒªÌí¼ÓÏà¹ØlibÎÄ¼ş
+## ç¯å¢ƒé…ç½®
+**é…ç½®opencv2.4.11çš„ç¯å¢ƒ**
+**é…ç½®Qt5.6+VS2015çš„ç¯å¢ƒ**
+**é¡¹ç›®å±æ€§-é“¾æ¥å™¨-è¾“å…¥-é™„åŠ ä¾èµ–é¡¹ éœ€è¦æ·»åŠ ç›¸å…³libæ–‡ä»¶
 
-## ¼¼ÊõÖ§³Ö
+## æŠ€æœ¯æ”¯æŒ
 (http://www.greenorbs.com/)
 */
 
@@ -23,7 +23,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv/cv.h>
 
-//--------------------------------ÈËÁ³¼ì²â----------------------------------------//
+//--------------------------------äººè„¸æ£€æµ‹----------------------------------------//
 void FaceFeature::Detect(FaceStruct& face_struct)
 {
 	face_struct.image = cv::imread(face_struct.fileName, 1);
@@ -40,7 +40,7 @@ void FaceFeature::Detect(FaceStruct& face_struct)
 	}
 	pResults = facedetect_multiview_reinforce(pBuffer, (unsigned char*)(src_img_gray.ptr(0)), 
 		src_img_gray.cols, src_img_gray.rows, (int)src_img_gray.step, 1.2f, 2, 80, 0, 0);
-	int peopleNUM = (pResults ? *pResults : 0);//¼¸ÕÅÈËÁ³
+	int peopleNUM = (pResults ? *pResults : 0);//å‡ å¼ äººè„¸
 	for (int i = 0; i < peopleNUM; i++)
 	{
 		short * p = ((short*)(pResults + 1)) + 142 * i;
@@ -52,12 +52,12 @@ void FaceFeature::Detect(FaceStruct& face_struct)
 		cv::resize(Src_Img_Crop_Mat, Src_Img_Crop_Mat, cv::Size(64, 64));
 		cv::Mat train; cv::cvtColor(Src_Img_Crop_Mat, train, CV_BGR2GRAY);
 
-		cv::HOGDescriptor * hog = new cv::HOGDescriptor(cvSize(64, 64), cvSize(16, 16), cvSize(8, 8), cvSize(8, 8), 9);//¶¨ÒåhogÌØÕ÷²ÎÊı
+		cv::HOGDescriptor * hog = new cv::HOGDescriptor(cvSize(64, 64), cvSize(16, 16), cvSize(8, 8), cvSize(8, 8), 9);//å®šä¹‰hogç‰¹å¾å‚æ•°
 		std::vector<float>descriptor;
-		hog->compute(train, descriptor, cv::Size(8, 8));//ÌáÈ¡hogÌØÕ÷
+		hog->compute(train, descriptor, cv::Size(8, 8));//æå–hogç‰¹å¾
 		int descriptorDim = descriptor.size();
 		cv::Mat feat = cv::Mat::zeros(1, descriptorDim, CV_32FC1);
-		for (int j = 0; j < descriptorDim; j++)//½«ÌØÕ÷ÏòÁ¿¸´ÖÆµ½¾ØÕóÖĞ
+		for (int j = 0; j < descriptorDim; j++)//å°†ç‰¹å¾å‘é‡å¤åˆ¶åˆ°çŸ©é˜µä¸­
 		{
 			feat.at<float>(0, j) = descriptor[j];
 		}
@@ -65,7 +65,7 @@ void FaceFeature::Detect(FaceStruct& face_struct)
 		face_struct.feats.push_back(feat);
 	}
 }
-//--------------------------------ÌáÈ¡ÑµÁ·¼¯ºÍ²âÊÔ¼¯ÌØÕ÷²¢±È¶Ô----------------------------------------//
+//--------------------------------æå–è®­ç»ƒé›†å’Œæµ‹è¯•é›†ç‰¹å¾å¹¶æ¯”å¯¹----------------------------------------//
 std::vector<std::vector<float>> FaceFeature::Recongnize(std::vector<FaceStruct>& face_struct_train,
 	FaceStruct& face_struct_test)
 {
@@ -74,14 +74,14 @@ std::vector<std::vector<float>> FaceFeature::Recongnize(std::vector<FaceStruct>&
 	{
 		Detect(face_struct_train[i]);
 		if (face_struct_train[i].faceRect.size() > 0)
-			train_feats.push_back(face_struct_train[i].feats[0]);//ÑµÁ·½öÓĞÒ»ÕÅÈËÁ³
+			train_feats.push_back(face_struct_train[i].feats[0]);//è®­ç»ƒä»…æœ‰ä¸€å¼ äººè„¸
 		else
 			face_struct_train.erase(face_struct_train.begin() + i);
 	}
 
 	return SimCalc(train_feats, face_struct_test);
 }
-//--------------------------------ÏàËÆ¶È¼ÆËã----------------------------------------//
+//--------------------------------ç›¸ä¼¼åº¦è®¡ç®—----------------------------------------//
 std::vector<std::vector<float>> FaceFeature::SimCalc(std::vector<cv::Mat> train_feats,
 	FaceStruct& face_struct_test)
 {
