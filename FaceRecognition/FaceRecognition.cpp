@@ -1,21 +1,21 @@
 /*
-## ´´½¨±êÊ¶£ºµÚÎå½ìÈ«¹ú´óÑ§ÉúÎïÁªÍø´óÈüÈËÁ³Ê¶±ğdemo
+## åˆ›å»ºæ ‡è¯†ï¼šç¬¬äº”å±Šå…¨å›½é«˜æ ¡ç‰©è”ç½‘åº”ç”¨åˆ›æ–°å¤§èµ›ï¼ˆå‘½é¢˜èµ›ï¼‰äººè„¸è¯†åˆ«demo
 
-## ´´½¨Ê±¼ä£º2017-12-20
+## åˆ›å»ºæ—¶é—´ï¼š2017-12-20
 
-## º¯Êı¹¦ÄÜÃèÊö£ºÈËÁ³Ê¶±ğ¿Ø¼ş
+## å‡½æ•°åŠŸèƒ½æè¿°ï¼šäººè„¸è¯†åˆ«æ§ä»¶
 
-## ¿ª·¢»·¾³
+## å¼€å‘ç¯å¢ƒ
 [Windows10+VS2015+Qt5.6+opencv2.4.11]
-**¿ª·¢ÓïÑÔC++**
-**±àÒë»·¾³x64**
+**å¼€å‘è¯­è¨€C++**
+**ç¼–è¯‘ç¯å¢ƒx64**
 
-## »·¾³ÅäÖÃ
-**ÅäÖÃopencv2.4.11µÄ»·¾³**
-**ÅäÖÃQt5.6+VS2015µÄ»·¾³**
-**ÏîÄ¿ÊôĞÔ-Á´½ÓÆ÷-ÊäÈë-¸½¼ÓÒÀÀµÏî ĞèÒªÌí¼ÓÏà¹ØlibÎÄ¼ş
+## ç¯å¢ƒé…ç½®
+**é…ç½®opencv2.4.11çš„ç¯å¢ƒ**
+**é…ç½®Qt5.6+VS2015çš„ç¯å¢ƒ**
+**é¡¹ç›®å±æ€§-é“¾æ¥å™¨-è¾“å…¥-é™„åŠ ä¾èµ–é¡¹ éœ€è¦æ·»åŠ ç›¸å…³libæ–‡ä»¶
 
-## ¼¼ÊõÖ§³Ö
+## æŠ€æœ¯æ”¯æŒ
 (http://www.greenorbs.com/)
 */
 
@@ -160,19 +160,19 @@ void FaceRecognition::UploadClick2()
 		path2 = path.toStdString();
 	}
 }
-//--------------------------------ÈËÁ³±È¶Ô----------------------------------------//
+//--------------------------------äººè„¸æ¯”å¯¹----------------------------------------//
 void FaceRecognition::FaceCompare()
 {
 	double time_Start = (double)clock();
 
 	if (path2.length() == 0) {
-		QMessageBox::information(NULL, QString::fromLocal8Bit("ÌáÊ¾"), QString::fromLocal8Bit("Î´Ñ¡ÔñÎÄ¼ş/ÎÄ¼ş¼Ğ"));
+		QMessageBox::information(NULL, QString::fromLocal8Bit("æç¤º"), QString::fromLocal8Bit("æœªé€‰æ‹©æ–‡ä»¶/æ–‡ä»¶å¤¹"));
 		return;
 	}
 	if (path1.capacity() == 0)
 	{
 		//select no file
-		QMessageBox::information(NULL, QString::fromLocal8Bit("ÌáÊ¾"), QString::fromLocal8Bit("Î´Ñ¡ÔñÎÄ¼ş/ÎÄ¼ş¼Ğ"));
+		QMessageBox::information(NULL, QString::fromLocal8Bit("æç¤º"), QString::fromLocal8Bit("æœªé€‰æ‹©æ–‡ä»¶/æ–‡ä»¶å¤¹"));
 		return;
 	}
 
@@ -186,46 +186,46 @@ void FaceRecognition::FaceCompare()
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
 	fun.Recognition(path1, path2, result1, result2, sim);
-	//ÅĞ¶ÏÊÇ·ñ¶¨ÒåFACEMATCHING
+	//åˆ¤æ–­æ˜¯å¦å®šä¹‰FACEMATCHING
 #ifdef FACEMATCHING
-	std::ofstream output_result;//Êä³ö½á¹û±£´æµ½txt
+	std::ofstream output_result;//è¾“å‡ºç»“æœä¿å­˜åˆ°txt
 	output_result.open("./result/result.txt", ios::out);
 
 	for (int i = 0; i < sim.size(); i++)
 	{
-		output_result << result2.fileName.substr(result2.fileName.length() - 6, 6) << ";";//Ğ´Èë²âÊÔÍ¼Æ¬Ãû
+		output_result << result2.fileName.substr(result2.fileName.length() - 6, 6) << ";";//å†™å…¥æµ‹è¯•å›¾ç‰‡å
 		std::vector<float> OneFaceSim = sim[i];
 		if (OneFaceSim.size() == 0)
 			continue;
-		int argmax = std::distance(OneFaceSim.begin(), std::max_element(OneFaceSim.begin(), OneFaceSim.end()));//ÕÒµ½×î´óÏàËÆ¶ÈµÄĞòºÅ
+		int argmax = std::distance(OneFaceSim.begin(), std::max_element(OneFaceSim.begin(), OneFaceSim.end()));//æ‰¾åˆ°æœ€å¤§ç›¸ä¼¼åº¦çš„åºå·
 		string argmaxName = result1[argmax].fileName;
 		float score = OneFaceSim[argmax];
 		if (score < THRESHOLD)
-			output_result << "NULL" << endl;//Ğ´ÈëÆ¥ÅäÏî
+			output_result << "NULL" << endl;//å†™å…¥åŒ¹é…é¡¹
 		else
 		{
-			fun.DrawResult(result2, i, argmaxName);//±ê¼Ç²âÊÔµÃµ½µÄlabel
-			output_result << argmaxName.substr(argmaxName.length() - 6, 6) << endl;//Ğ´ÈëÆ¥ÅäÏî
+			fun.DrawResult(result2, i, argmaxName);//æ ‡è®°æµ‹è¯•å¾—åˆ°çš„label
+			output_result << argmaxName.substr(argmaxName.length() - 6, 6) << endl;//å†™å…¥åŒ¹é…é¡¹
 		}
 		ui.resultBrowser->append("Most similarity image is :" + QString::fromStdString(argmaxName.substr(argmaxName.length() - 6, 6)) + " @ Similarity = " + QString::number(100 * score) + "%");
 	}
 	output_result.close();
 #else
-	//ÈËÁ³±êÊ¶
+	//äººè„¸æ ‡è¯†
 	for (int i = 0; i < sim.size(); i++)
 	{
 		std::vector<float> OneFaceSim = sim[i];
 		if (OneFaceSim.size() == 0)
 			continue;
-		int argmax = std::distance(OneFaceSim.begin(), std::max_element(OneFaceSim.begin(), OneFaceSim.end()));//ÕÒµ½×î´óÏàËÆ¶ÈµÄĞòºÅ
+		int argmax = std::distance(OneFaceSim.begin(), std::max_element(OneFaceSim.begin(), OneFaceSim.end()));//æ‰¾åˆ°æœ€å¤§ç›¸ä¼¼åº¦çš„åºå·
 		string argmaxName = result1[argmax].fileName;
 		float score = OneFaceSim[argmax];
 		if (score < THRESHOLD)
 			continue;
-		fun.DrawResult(result2, i, argmaxName);//±ê¼Ç²âÊÔµÃµ½µÄlabel
+		fun.DrawResult(result2, i, argmaxName);//æ ‡è®°æµ‹è¯•å¾—åˆ°çš„label
 		ui.resultBrowser->append("Most similarity image is :" + QString::fromStdString(argmaxName.substr(argmaxName.length() - 6, 6)) + " @ Similarity = " + QString::number(100 * score) + "%");
 	}
-	//½«±êÊ¶µÄ½á¹û±£´æµ½±¾µØ
+	//å°†æ ‡è¯†çš„ç»“æœä¿å­˜åˆ°æœ¬åœ°
 	char path[256]; int count = 1;
 	sprintf(path, "./result/%02d.jpg", count);
 	cv::imwrite(path, result2.drawImg);
@@ -246,7 +246,7 @@ void FaceRecognition::FaceCompare()
 		QImage img = Mat2QImage(result1[i].drawImg);
 		QPixmap pixmap = QPixmap::fromImage(img);
 		QListWidgetItem *pItem = new QListWidgetItem(QIcon(pixmap), NULL);
-		//ÉèÖÃµ¥ÔªÏîµÄ¿í¶ÈºÍ¸ß¶È 
+		//è®¾ç½®å•å…ƒé¡¹çš„å®½åº¦å’Œé«˜åº¦ 
 		int icon_width = 102, icon_height = 126;
 		pItem->setSizeHint(QSize(icon_width, icon_height));
 		ui.imglistWidget->insertItem(i, pItem);
