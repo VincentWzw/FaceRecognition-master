@@ -14,8 +14,8 @@
 
 ## 环境配置
 **配置opencv的环境，配置过程参见
-（http://blog.csdn.net/u011583927/article/details/52434673 或 http://blog.csdn.net/xsugus/article/details/71023488）**
-**配置Qt5.6+VS2015的环境，配置过程参见（https://www.cnblogs.com/findumars/p/5970073.html）**
+（http://blog.csdn.net/u011583927/article/details/52434673 或 http://blog.csdn.net/xsugus/article/details/71023488 ）**
+**配置Qt5.6+VS2015的环境，配置过程参见（https://www.cnblogs.com/findumars/p/5970073.html ）**
 **项目属性-VC++目录-包含目录 需要添加相应包含文件**
 **项目属性-链接器-输入-附加依赖项 需要添加相应库文件**
 
